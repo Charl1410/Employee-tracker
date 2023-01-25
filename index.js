@@ -29,25 +29,25 @@ function starterQuestions() {
     //checking each response and running add specific function based on selection from main menu questions
     .then(function(response) {
         if(response.action_choice === 'view departments'){
-            // viewDepartments()
+            viewDepartments()
        }
 
        else if(response.action_choice === 'view roles'){
-            // addIntern()
+            viewRoles()
 
         }
 
         else if(response.action_choice === 'view employees'){
-            // addManager()
+            viewEmployees()
 
        }
 
        else if(response.action_choice === 'add departments'){
-        // addManager()
+            addDepartment()
 
         }
         else if(response.action_choice === 'add role'){
-            // addManager()
+             addRole()
 
         }
         
@@ -88,4 +88,20 @@ function viewEmployees() {
         console.table(results);
         starterQuestions();
     });
+}
+
+function addDepartment() {
+    inquirer
+//calling the questions to add depatment 
+        .prompt(AddDepartmentQuestions)
+        .then((response) => {
+            db.addDepartment(response).then((results) => {
+                console.log(results);
+                MenuQuestions();
+            }); 
+        })
+}
+
+function addRole() {
+
 }
