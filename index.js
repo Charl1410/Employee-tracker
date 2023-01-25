@@ -29,7 +29,7 @@ function starterQuestions() {
     //checking each response and running add specific function based on selection from main menu questions
     .then(function(response) {
         if(response.action_choice === 'view departments'){
-            // addEngineer()
+            // viewDepartments()
        }
 
        else if(response.action_choice === 'view roles'){
@@ -60,12 +60,32 @@ function starterQuestions() {
             //add function to update roles 
         }
 
-     
-
-       //else build the team
-    //    else buildTeam(managerArray, engineerArray, internArray);
-
 
        
      })
+}
+
+function viewDepartments() {
+    //get departments from database and console logs database in table 
+    db.getDepartments().then((results) => {
+        console.table(results);
+    //then restarts menu questions
+        starterQuestions();
+    });
+}
+
+function viewRoles() {
+    //get roles from database and console logs database in table 
+    db.getRoles().then((results) => {
+        console.table(results);
+        starterQuestions();
+    });
+}
+
+function viewEmployees() {
+    //get departments from database and console logs database in table 
+    db.getEmployees().then((results) => {
+        console.table(results);
+        starterQuestions();
+    });
 }
