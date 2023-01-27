@@ -1,4 +1,4 @@
-const AddDepartmentQuestions = [
+const addDepartmentQuestions = [
     {
         type: "input",
         name: "name",
@@ -7,7 +7,7 @@ const AddDepartmentQuestions = [
     
 ];
 
-const roleQuestion = [
+const roleQuestions = [
     {
         type: 'input',
         name: 'role_title',
@@ -52,11 +52,22 @@ const employeeQuestions = [
     choices: []
 
     },
-        
-    
-    
-    
+]
 
+const updateEmployeeRoleQuestions = [
+    
+        {
+            type: 'list',
+            name: 'employee_id',
+            message: 'Which Employee\'s Role do you want to Update?',
+            choices: [],
+          },
+          {
+            type: 'list',
+            name: 'role_id',
+            message: 'Which Role do you want to assign to the selected Employee?',
+            choices: [],
+          },
     
 ]
 
@@ -64,6 +75,4 @@ const employeeQuestions = [
 
 
 
-
-
-module.exports = {AddDepartmentQuestions, departmentQuestions}
+module.exports = {addDepartmentQuestions, roleQuestion, departmentQuestions, employeeQuestions, updateEmployeeRoleQuestions}
