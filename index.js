@@ -52,7 +52,7 @@ function starterQuestions() {
       } else if (response.action_choice === "add employee") {
         addEmployee();
       } else {
-        //add function to update roles
+        updateRole();
       }
     });
 }
@@ -138,7 +138,7 @@ function addEmployee() {
     //grabbing the who is the manager for employee question
       const managerOptions = employeeQuestions[3];
 
-      results.forEach((role) => {
+      results.forEach((emplyee) => {
         //for each instance of the the question adding the employee name and id as the option to pick from 
         managerOptions.choices.push({
           value: employee.id,
@@ -153,8 +153,6 @@ function addEmployee() {
         inquirer.prompt(employeeQuestions).then((response) => {
           db.addNewEmployee(response).then((results) => {
             console.table(results)
-
-            starterQuestions()
           })
         })
     });
@@ -163,3 +161,38 @@ function addEmployee() {
   //recalling main questions
   starterQuestions();
 }
+
+function updateRole() {
+  db.getEmployees().then((results) => {
+    //grabbing the option for the first question 
+      const employeeOptions = updateEmployeeRoleQuestions[0];
+
+      results.forEach((employee) => {
+        //for each instance of the the question adding the employee role to update 
+        employeeOptions.choices.push({
+          value: employee.id,
+          name: employee.name
+        });
+      });
+    db.getRoles().then((results)=> {
+      const roleOptions = updateEmployeeRoleQuestions[1];
+
+      results.forEach((role) => {
+        //for each instance of the the question adding the employee role to update 
+        roleOptions.choices.push({
+          value: role.id,
+          name: role.name
+        });
+    })
+    inquirer.prompt(updateEmployeeRoleQuestions).then((response) => {
+      db.addNewEmployee(response).then((results) => {
+        console.table(results);
+        starterQuestions()
+      })
+    })
+    
+  })
+})
+}
+
+starterQuestions()

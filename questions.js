@@ -65,7 +65,7 @@ const updateEmployeeRoleQuestions = [
           {
             type: 'list',
             name: 'role_id',
-            message: 'Which Role do you want to assign to the selected Employee?',
+            message: 'Which Role do you want to give to your chosen Employee?',
             choices: [],
           },
     
