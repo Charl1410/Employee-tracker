@@ -50,7 +50,7 @@ function starterQuestions() {
       } else if (response.action_choice === "add role") {
         addRole();
       } else if (response.action_choice === "add employee") {
-        addEmployee()
+        addEmployee();
       } else {
         //add function to update roles
       }
@@ -107,26 +107,59 @@ function addRole() {
       });
     }); //run role request to inset new role into db
   });
+  //loading in the role questions containing the department options in choices
   inquirer.prompt(roleQuestions).then((response) => {
+    //getting the response and showing results
     db.addRole(response).then((results) => console.table(results));
   });
-
+  //recalling main questions
   starterQuestions();
 }
 
 function addEmployee() {
+  //run role request to inset new role into db
   //gets the departments from the database
   db.getRoles().then((results) => {
-    //creates a var of thse 3rd question in the array
-    const departmentOptions = roleQuestions[2];
+    //creates a var of thse 3rd question in the array of role options
+    const roleOptions = employeeQuestions[2];
+    //creates a summary of all the roles 
+    const roleSummary = `${role.title} ${role.salary} ${role.department_id}`
     //for each department that exists push the options of that department in
-    results.forEach((department) => {
-      departmentOptions.choices.push({
-        value: department.id,
-        name: department.name,
+    results.forEach((role) => {
+        //for each role option choice, pushes the role id number and the summary of the role in
+      roleOptions.choices.push({
+        value: role.id,
+        name: roleSummary,
       });
-    }); //run role request to inset new role into db
+    });
+
+    //gets all the employees from the database
+    db.getEmployees().then((results) => {
+    //grabbing the who is the manager for employee question
+      const managerOptions = employeeQuestions[3];
+
+      results.forEach((role) => {
+        //for each instance of the the question adding the employee name and id as the option to pick from 
+        managerOptions.choices.push({
+          value: employee.id,
+          name: employee.name
+        });
+      });
+
+      managerOptions.choices.push({
+        value:null,
+        name:'none'
+      })
+        inquirer.prompt(employeeQuestions).then((response) => {
+          db.addNewEmployee(response).then((results) => {
+            console.table(results)
+
+            starterQuestions()
+          })
+        })
+    });
   });
 
+  //recalling main questions
   starterQuestions();
 }
