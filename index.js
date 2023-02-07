@@ -1,4 +1,4 @@
-const inquirer = requre("inquirer");
+const inquirer = require("inquirer");
 const {
   addDepartmentQuestions,
   roleQuestions,
