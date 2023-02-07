@@ -40,7 +40,7 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 To use this application node.js must be installed: https://nodejs.org/en/download/ <br />
 
-*The packages required are:**
+**The packages required are:**
 
 * **MYSQL2**  
 
