@@ -21,7 +21,7 @@ class initialiseDatabase {
 
         this.validate();
 
-        const { host, user, password, database} = this.data;
+        const { host, user, password, database} = this.info;
 
         this.db = mysql.createConnection(
             {

@@ -75,4 +75,4 @@ const updateEmployeeRoleQuestions = [
 
 
 
-module.exports = {addDepartmentQuestions, roleQuestion, departmentQuestions, employeeQuestions, updateEmployeeRoleQuestions}
+module.exports = {addDepartmentQuestions, roleQuestions, employeeQuestions, updateEmployeeRoleQuestions}
