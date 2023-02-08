@@ -90,14 +90,14 @@ class EmployeeDatabase extends Database {
         this.db.query(
           //selecting the employee table to insert into 
           //inserting columns to the new role name (title) salary and its department id from the inquirer into the database 
-          'INSERT INTO employee SET ?', {firstName: employee.first_name, lastName: employee.last_name, roleID: employee.role_id, ManagerID: employee.manager_id}
-       ),
+          'INSERT INTO employee SET ?', {first_name: employee.first_name, last_name: employee.last_name, role_id: employee.role_id, Manager_id: employee.manager_id},
+      
           (err, results) => {
             if (err) {
               reject(err);
             }
             resolve(`You have successfully added a new employee, ${employee.first_name} ${employee.last_name} to your database`);
-          };
+          });
       });
 
     }

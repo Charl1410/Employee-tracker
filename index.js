@@ -129,14 +129,14 @@ function addRole() {
 
 function addEmployee() {
   //run role request to inset new role into db
-  //gets the departments from the database
+  //gets the roles from the database
   db.getRoles().then((results) => {
     //creates a var of thse 3rd question in the array of role options
     const roleOptions = employeeQuestions[2];
     //creates a summary of all the roles 
-    const roleSummary = `${role.title} ${role.salary} ${role.department_id}`
     //for each department that exists push the options of that department in
     results.forEach((role) => {
+      const roleSummary = `${role.title} ${role.salary} ${role.department_name}`
         //for each role option choice, pushes the role id number and the summary of the role in
       roleOptions.choices.push({
         value: role.id,
@@ -149,28 +149,31 @@ function addEmployee() {
     //grabbing the who is the manager for employee question
       const managerOptions = employeeQuestions[3];
 
-      results.forEach((emplyee) => {
+      results.forEach((employee) => {
         //for each instance of the the question adding the employee name and id as the option to pick from 
         managerOptions.choices.push({
           value: employee.id,
-          name: employee.name
+          name: employee.first_name + " " + employee.last_name
         });
       });
 
+      //pushing the manager choices in if they are wanted 
       managerOptions.choices.push({
-        value:null,
-        name:'none'
+        value: null,
+        name: 'none'
       })
         inquirer.prompt(employeeQuestions).then((response) => {
-          db.addNewEmployee(response).then((results) => {
+          db.addEmployee(response).then((results) => {
             console.table(results)
+
+              //recalling main questions
+              starterQuestions();
           })
         })
     });
   });
 
-  //recalling main questions
-  starterQuestions();
+
 }
 
 function updateRole() {

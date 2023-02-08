@@ -46,9 +46,9 @@ const employeeQuestions = [
         },
 
     { 
-    type: 'input',
+    type: 'list',
     name: 'manager_id',
-    message: 'Who is the manager for that employee??',
+    message: 'Who is the manager for that employee?',
     choices: []
 
     },
