@@ -56,14 +56,14 @@ class EmployeeDatabase extends Database {
       return new Promise((resolve, reject) => {
         this.db.query(
           //inserting the new department name from the inquirer into the database 
-          'INSET INTO department ?', {name: newDepartment.deparment_name}
-       ),
-          (err, results) => {
+          'INSERT INTO department SET ?', {name: newDepartment.department_name},
+       
+          (err) => {
             if (err) {
               reject(err);
             }
             resolve(`Your department, ${newDepartment.department_name} was added successfully`);
-          };
+          });
       });
     }
 
@@ -73,14 +73,14 @@ class EmployeeDatabase extends Database {
         this.db.query(
           //selecting the role table to insert into 
           //inserting the new role name (title) salary and its department id from the inquirer into the database 
-          'INSET INTO role ?', {title: role.title, salary:role.salary, department_id: role.department_id}
-       ),
+          'INSERT INTO role SET ?', {title: role.title, salary: role.salary, department_id: role.department_id},
+       
           (err, results) => {
             if (err) {
               reject(err);
             }
             resolve(`Your role, ${role.title} was added successfully`);
-          };
+          }); 
       });
 
     }
@@ -90,7 +90,7 @@ class EmployeeDatabase extends Database {
         this.db.query(
           //selecting the employee table to insert into 
           //inserting columns to the new role name (title) salary and its department id from the inquirer into the database 
-          'INSET INTO employee ?', {firstName: employee.first_name, lastName: employee.last_name, roleID: employee.role_id, ManagerID: employee.manager_id}
+          'INSERT INTO employee SET ?', {firstName: employee.first_name, lastName: employee.last_name, roleID: employee.role_id, ManagerID: employee.manager_id}
        ),
           (err, results) => {
             if (err) {
@@ -101,6 +101,7 @@ class EmployeeDatabase extends Database {
       });
 
     }
+
   
 }
 module.exports = EmployeeDatabase;

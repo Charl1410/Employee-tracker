@@ -1,7 +1,7 @@
 const addDepartmentQuestions = [
     {
         type: "input",
-        name: "name",
+        name: "department_name",
         message: "What's the name of your department?",
     }
     
@@ -10,17 +10,17 @@ const addDepartmentQuestions = [
 const roleQuestions = [
     {
         type: 'input',
-        name: 'role_title',
+        name: 'title',
         message: 'What is the name of the role?',
     },
     {
         type: 'input',
-        name: 'role_salary',
+        name: 'salary',
         message: 'What is the salary for the role?',
     },
     {
         type: 'list',
-        name: 'departyment_id',
+        name: 'department_id',
         message: 'What department does this role belong to?',
         choices: []
     }

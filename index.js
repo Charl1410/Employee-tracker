@@ -45,14 +45,14 @@ function starterQuestions() {
         viewRoles();
       } else if (response.action_choice === "view employees") {
         viewEmployees();
-      } else if (response.action_choice === "add departments") {
+      } else if (response.action_choice === "add department") {
         addDepartment();
       } else if (response.action_choice === "add role") {
         addRole();
       } else if (response.action_choice === "add employee") {
         addEmployee();
-      } else {
-        updateRole();
+      // } else {
+      //   updateEmployee();
       }
     });
 }
@@ -89,7 +89,7 @@ function addDepartment() {
     .then((response) => {
       db.addDepartment(response).then((results) => {
         console.log(results);
-        MenuQuestions();
+        starterQuestions()
       });
     });
 }
@@ -105,15 +105,26 @@ function addRole() {
         value: department.id,
         name: department.name,
       });
-    }); //run role request to inset new role into db
+
+    });
+
   });
-  //loading in the role questions containing the department options in choices
-  inquirer.prompt(roleQuestions).then((response) => {
-    //getting the response and showing results
-    db.addRole(response).then((results) => console.table(results));
-  });
+
+       //run role request to inset new role into db
+      //loading in the role questions containing the department options in choices
+      inquirer.prompt(roleQuestions)
+      .then((response) => {
+        //getting the response and showing results
+        db.addRole(response).then((results) =>  { 
+          
+          console.table(results);
+        //calling starter questions
+        starterQuestions();
+
+      });
+
+      });
   //recalling main questions
-  starterQuestions();
 }
 
 function addEmployee() {
