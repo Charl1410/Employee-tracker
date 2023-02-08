@@ -51,19 +51,56 @@ class EmployeeDatabase extends Database {
       );
     });
   }
-  //passing in newDepartment into this function
-  //   addDepartment(newDepartment) {
-  //     return new Promise((resolve, reject) => {
-  //       this.db.query(
-  //         'INSET INTO department ?', {name: }
-  //       ),
-  //         (err, results) => {
-  //           if (err) {
-  //             reject(err);
-  //           }
-  //           resolve(results);
-  //         };
-  //     });
-  //   }
+  //query function to add a new deparment to the databse 
+    addDepartment(newDepartment) {
+      return new Promise((resolve, reject) => {
+        this.db.query(
+          //inserting the new department name from the inquirer into the database 
+          'INSET INTO department ?', {name: newDepartment.deparment_name}
+       ),
+          (err, results) => {
+            if (err) {
+              reject(err);
+            }
+            resolve(`Your department, ${newDepartment.department_name} was added successfully`);
+          };
+      });
+    }
+
+    //query to inset a new role into the database 
+    addRole(role) {
+      return new Promise((resolve, reject) => {
+        this.db.query(
+          //selecting the role table to insert into 
+          //inserting the new role name (title) salary and its department id from the inquirer into the database 
+          'INSET INTO role ?', {title: role.title, salary:role.salary, department_id: role.department_id}
+       ),
+          (err, results) => {
+            if (err) {
+              reject(err);
+            }
+            resolve(`Your role, ${role.title} was added successfully`);
+          };
+      });
+
+    }
+
+    addEmployee(employee) {
+      return new Promise((resolve, reject) => {
+        this.db.query(
+          //selecting the employee table to insert into 
+          //inserting columns to the new role name (title) salary and its department id from the inquirer into the database 
+          'INSET INTO employee ?', {firstName: employee.first_name, lastName: employee.last_name, roleID: employee.role_id, ManagerID: employee.manager_id}
+       ),
+          (err, results) => {
+            if (err) {
+              reject(err);
+            }
+            resolve(`You have successfully added a new employee, ${employee.first_name} ${employee.last_name} to your database`);
+          };
+      });
+
+    }
+  
 }
 module.exports = EmployeeDatabase;
