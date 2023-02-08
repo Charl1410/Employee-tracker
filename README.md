@@ -52,7 +52,7 @@ All dependencies should already be in the package.json file and installed throug
 
 To use this application all dependencies must be installed. <br>
 
-To run the application:
+To view a walkthrough of the application: https://vimeo.com/manage/videos/797168716/f633f438e2/privacy
 
 * The data base must be created by logging into mysql `mysql -u root -p` and running the command `source db/schema.sql`
 
