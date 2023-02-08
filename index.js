@@ -2,7 +2,6 @@ const inquirer = require("inquirer");
 const {
   addDepartmentQuestions,
   roleQuestions,
-  departmentQuestions,
   employeeQuestions,
   updateEmployeeRoleQuestions,
 } = require("./questions");
@@ -51,8 +50,8 @@ function starterQuestions() {
         addRole();
       } else if (response.action_choice === "add employee") {
         addEmployee();
-      // } else {
-      //   updateEmployee();
+      } else {
+         updateRole();
       }
     });
 }
@@ -185,7 +184,7 @@ function updateRole() {
         //for each instance of the the question adding the employee role to update 
         employeeOptions.choices.push({
           value: employee.id,
-          name: employee.name
+          name: employee.first_name + " " + employee.last_name
         });
       });
     db.getRoles().then((results)=> {
@@ -195,11 +194,11 @@ function updateRole() {
         //for each instance of the the question adding the employee role to update 
         roleOptions.choices.push({
           value: role.id,
-          name: role.name
+          name: role.title
         });
     })
     inquirer.prompt(updateEmployeeRoleQuestions).then((response) => {
-      db.addNewEmployee(response).then((results) => {
+      db.updateRole(response).then((results) => {
         console.table(results);
         starterQuestions()
       })

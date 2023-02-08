@@ -102,6 +102,23 @@ class EmployeeDatabase extends Database {
 
     }
 
+  updateRole(role) {
+    return new Promise((resolve, reject) => {
+      this.db.query(
+        //selecting the employee table to insert into 
+        //inserting columns to the new role name (title) salary and its department id from the inquirer into the database 
+        'UPDATE employee SET role_id =? WHERE id=?', [role.role_id, role.employee_id],
+    
+        (err, results) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(`You have successfully updated your employee to ${role.role_id}`);
+        });
+    });
+
+  }
+
   
 }
 module.exports = EmployeeDatabase;
